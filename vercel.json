@@ -9,10 +9,6 @@
       "destination": "/attached_assets/extracted_site/Mjol4GohOxlM.au/wp-content/:path*"
     },
     {
-      "source": "/:path(.*\\.(css|js|png|jpg|jpeg|gif|svg|webp|woff|woff2|ttf|eot|ico))",
-      "destination": "/attached_assets/extracted_site/Mjol4GohOxlM.au/:path"
-    },
-    {
       "source": "/contact",
       "destination": "/dist/public/index.html"
     },
@@ -23,6 +19,17 @@
     {
       "source": "/:path*",
       "destination": "/dist/public/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
     }
   ]
 }
