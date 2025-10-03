@@ -4,6 +4,22 @@ This is a construction/home building company website called "Built Better Homes"
 
 The WordPress site is served statically from extracted files, while the React application provides an enhanced contact form at `/contact` that sends email notifications via Resend. The application uses TypeScript throughout for type safety.
 
+# Recent Changes
+
+**October 2025 - Replit Environment Setup**:
+- Migrated from hardcoded API keys to environment variables for security
+- Created `.env` file with `RESEND_API_KEY` and `NOTIFICATION_EMAIL`
+- Updated `.gitignore` to exclude `.env` and `.env.local` files
+- Configured Replit workflow to run on port 5000 with webview output
+- Set up deployment configuration for autoscale deployment target
+- Verified application runs correctly in Replit environment
+- Both WordPress static site (root `/`) and React contact form (`/contact`) working properly
+
+**January 2025**: 
+- Updated API serverless function to use proper Vercel handler format
+- Installed @vercel/node for Vercel serverless compatibility
+- Simplified vercel.json to let Vercel auto-handle API routes
+
 # User Preferences
 
 Preferred communication style: Simple, everyday language.
@@ -55,8 +71,8 @@ Preferred communication style: Simple, everyday language.
 - CORS enabled - API accepts requests from any domain, allowing form integration on external websites
 
 **Email Notifications**: Resend integration for contact form submissions
-- API Key: Hardcoded in `server/routes.ts`
-- Notification Email: austencentellas@gmail.com
+- API Key: Stored in environment variable `RESEND_API_KEY`
+- Notification Email: Stored in environment variable `NOTIFICATION_EMAIL`
 - Sends formatted HTML emails with submission details (name, email, phone, budget, location, message)
 
 **Request Logging**: Custom middleware for API request logging
@@ -95,6 +111,7 @@ The contact form collects the following information:
 - HMR (Hot Module Replacement) support
 - Custom error logging that exits on Vite errors
 - Template-based SSR setup for development
+- Configured to allow all hosts for Replit proxy compatibility
 
 **Production Build**: 
 - Frontend: Vite builds to `dist/public`
@@ -105,22 +122,24 @@ The contact form collects the following information:
 - Incremental builds for faster compilation
 - Path aliases configured for cleaner imports (@, @shared, @assets)
 
+**Environment Variables**:
+- `RESEND_API_KEY` - API key for Resend email service
+- `NOTIFICATION_EMAIL` - Email address to receive contact form notifications
+- `NODE_ENV` - Environment mode (development/production)
+- `PORT` - Server port (defaults to 5000)
+
 ## Deployment
+
+**Replit Deployment**: Configured for autoscale deployment
+- Build command: `npm run build`
+- Run command: `npm run start`
+- Serves on port 5000 (only non-firewalled port)
+- Host: 0.0.0.0 for external access
 
 **Vercel Configuration**: Ready for Vercel deployment
 - `vercel.json` configured with proper routing
 - Framework: Vite
-- No environment variables required
 - Static WordPress site and React SPA properly routed
-
-## Recent Changes
-
-**January 2025**: 
-- Updated API serverless function to use proper Vercel handler format
-- Installed @vercel/node for Vercel serverless compatibility
-- Simplified vercel.json to let Vercel auto-handle API routes
-- Hardcoded Resend API key: `re_ZNUP6pdA_FMkRDQ4Q5LGbhKWG41yTwVDP`
-- Hardcoded notification email: `austencentellas@gmail.com`
 
 ## External Dependencies
 
@@ -147,6 +166,7 @@ The contact form collects the following information:
 - date-fns - Date manipulation library
 - adm-zip - ZIP file handling (for asset management)
 - wouter - Lightweight routing
+- nanoid - Unique ID generation
 
 **Development Tools**:
 - @replit/vite-plugin-runtime-error-modal - Development error overlay
