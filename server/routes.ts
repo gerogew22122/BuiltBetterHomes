@@ -27,7 +27,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Send email notification via Resend
       try {
         const resend = new Resend(RESEND_API_KEY);
-        await resend.emails.send({
+        const result = await resend.emails.send({
           from: 'onboarding@resend.dev',
           to: NOTIFICATION_EMAIL,
           subject: `New Contact Form Submission from ${validatedData.name}`,
@@ -42,10 +42,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
             <p>${validatedData.message}</p>
           `,
         });
-        console.log('Email notification sent successfully');
-      } catch (emailError) {
+        console.log('Email notification sent successfully:', result);
+      } catch (emailError: any) {
         console.error('Failed to send email notification:', emailError);
-        res.status(500).json({ success: false, message: "Failed to send notification email." });
+        const errorMessage = emailError?.message || 'Unknown email error';
+        res.status(500).json({ 
+          success: false, 
+          message: `Failed to send email: ${errorMessage}` 
+        });
         return;
       }
 
