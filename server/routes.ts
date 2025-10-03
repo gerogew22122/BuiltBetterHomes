@@ -5,8 +5,8 @@ import express from "express";
 import { Resend } from "resend";
 import { insertContactSubmissionSchema } from "@shared/schema";
 
-const RESEND_API_KEY = "re_ZNUP6pdA_FMkRDQ4Q5LGbhKWG41yTwVDP";
-const NOTIFICATION_EMAIL = "austencentellas@gmail.com";
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL;
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API route to handle contact form submissions
