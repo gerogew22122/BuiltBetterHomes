@@ -4,8 +4,8 @@ import path from "path";
 import { Resend } from "resend";
 import { insertContactSubmissionSchema } from "../shared/schema";
 
-const RESEND_API_KEY = process.env.RESEND_API_KEY || "";
-const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL || "";
+const RESEND_API_KEY = "re_5apkDg8B_Mp8JHnC6MNmeZpTnu7mTpyoy";
+const NOTIFICATION_EMAIL = "austencentellas@gmail.com";
 
 const app = express();
 app.use(cors());
