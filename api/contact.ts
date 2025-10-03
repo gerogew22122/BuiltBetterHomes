@@ -2,8 +2,8 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Resend } from "resend";
 import { insertContactSubmissionSchema } from "../shared/schema";
 
-const RESEND_API_KEY = "re_ZNUP6pdA_FMkRDQ4Q5LGbhKWG41yTwVDP";
-const NOTIFICATION_EMAIL = "austencentellas@gmail.com";
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL;
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Enable CORS
