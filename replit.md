@@ -113,6 +113,15 @@ The contact form collects the following information:
 - No environment variables required
 - Static WordPress site and React SPA properly routed
 
+## Recent Changes
+
+**January 2025**: 
+- Updated API serverless function to use proper Vercel handler format
+- Installed @vercel/node for Vercel serverless compatibility
+- Simplified vercel.json to let Vercel auto-handle API routes
+- Hardcoded Resend API key: `re_ZNUP6pdA_FMkRDQ4Q5LGbhKWG41yTwVDP`
+- Hardcoded notification email: `austencentellas@gmail.com`
+
 ## External Dependencies
 
 **UI Component Libraries**:

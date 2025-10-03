@@ -1,10 +1,6 @@
 {
   "rewrites": [
     {
-      "source": "/api/:path*",
-      "destination": "/api"
-    },
-    {
       "source": "/wp-content/:path*",
       "destination": "/attached_assets/extracted_site/Mjol4GohOxlM.au/wp-content/:path*"
     },
@@ -17,19 +13,8 @@
       "destination": "/attached_assets/extracted_site/Mjol4GohOxlM.au/index.html"
     },
     {
-      "source": "/:path*",
+      "source": "/:path((?!api/).*)",
       "destination": "/dist/public/index.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        }
-      ]
     }
   ]
 }
