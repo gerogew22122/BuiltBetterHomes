@@ -22,6 +22,8 @@ export const contactSubmissions = pgTable("contact_submissions", {
   name: text("name").notNull(),
   email: text("email").notNull(),
   phone: text("phone").notNull(),
+  budget: text("budget").notNull(),
+  area: text("area").notNull(),
   message: text("message").notNull(),
   submittedAt: timestamp("submitted_at").notNull().defaultNow(),
 });
@@ -33,6 +35,8 @@ export const insertContactSubmissionSchema = createInsertSchema(contactSubmissio
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Please enter a valid email address"),
   phone: z.string().min(1, "Phone number is required"),
+  budget: z.string().min(1, "Budget is required"),
+  area: z.string().min(1, "Area is required"),
   message: z.string().min(1, "Message is required"),
 });
 

@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Phone, Mail, MessageSquare, User } from "lucide-react";
+import { Phone, Mail, MessageSquare, User, DollarSign, MapPin } from "lucide-react";
 
 export default function Contact() {
   const { toast } = useToast();
@@ -27,6 +27,8 @@ export default function Contact() {
       name: "",
       email: "",
       phone: "",
+      budget: "",
+      area: "",
       message: "",
     },
   });
@@ -127,6 +129,50 @@ export default function Contact() {
                             placeholder="Your phone number"
                             className="pl-10"
                             data-testid="input-phone"
+                            {...field}
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="budget"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Budget</FormLabel>
+                      <FormControl>
+                        <div className="relative">
+                          <DollarSign className="absolute left-3 top-3 h-4 w-4 text-gray-400" aria-hidden="true" />
+                          <Input
+                            placeholder="Your budget range"
+                            className="pl-10"
+                            data-testid="input-budget"
+                            {...field}
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="area"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Area there from</FormLabel>
+                      <FormControl>
+                        <div className="relative">
+                          <MapPin className="absolute left-3 top-3 h-4 w-4 text-gray-400" aria-hidden="true" />
+                          <Input
+                            placeholder="Your location or area"
+                            className="pl-10"
+                            data-testid="input-area"
                             {...field}
                           />
                         </div>

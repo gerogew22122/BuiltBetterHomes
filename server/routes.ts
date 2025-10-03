@@ -49,6 +49,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
               <p><strong>Name:</strong> ${validatedData.name}</p>
               <p><strong>Email:</strong> ${validatedData.email}</p>
               <p><strong>Phone:</strong> ${validatedData.phone}</p>
+              <p><strong>Budget:</strong> ${validatedData.budget}</p>
+              <p><strong>Area:</strong> ${validatedData.area}</p>
               <p><strong>Message:</strong></p>
               <p>${validatedData.message}</p>
             `,
