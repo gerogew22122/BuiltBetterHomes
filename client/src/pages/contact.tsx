@@ -165,12 +165,12 @@ export default function Contact() {
                   name="area"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Area there from</FormLabel>
+                      <FormLabel>Location</FormLabel>
                       <FormControl>
                         <div className="relative">
                           <MapPin className="absolute left-3 top-3 h-4 w-4 text-gray-400" aria-hidden="true" />
                           <Input
-                            placeholder="Your location or area"
+                            placeholder="Your location"
                             className="pl-10"
                             data-testid="input-area"
                             {...field}
