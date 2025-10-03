@@ -2,8 +2,11 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import path from "path";
 import express from "express";
+import { Resend } from "resend";
 import { storage } from "./storage";
 import { insertContactSubmissionSchema } from "@shared/schema";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API route to handle contact form submissions
@@ -11,6 +14,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const validatedData = insertContactSubmissionSchema.parse(req.body);
       const submission = await storage.createContactSubmission(validatedData);
+
+      try {
+        await resend.emails.send({
+          from: 'onboarding@resend.dev',
+          to: process.env.NOTIFICATION_EMAIL!,
+          subject: `New Contact Form Submission from ${validatedData.name}`,
+          html: `
+            <h2>New Contact Form Submission</h2>
+            <p><strong>Name:</strong> ${validatedData.name}</p>
+            <p><strong>Email:</strong> ${validatedData.email}</p>
+            <p><strong>Phone:</strong> ${validatedData.phone}</p>
+            <p><strong>Message:</strong></p>
+            <p>${validatedData.message}</p>
+          `,
+        });
+        console.log('Email notification sent successfully');
+      } catch (emailError) {
+        console.error('Failed to send email notification:', emailError);
+      }
+
       res.json({ success: true, message: "Thank you! We'll be in touch soon." });
     } catch (error) {
       console.error('Contact form error:', error);
