@@ -4,7 +4,7 @@ import path from "path";
 import { Resend } from "resend";
 import { insertContactSubmissionSchema } from "../shared/schema";
 
-const RESEND_API_KEY = "re_5apkDg8B_Mp8JHnC6MNmeZpTnu7mTpyoy";
+const RESEND_API_KEY = "re_ZNUP6pdA_FMkRDQ4Q5LGbhKWG41yTwVDP";
 const NOTIFICATION_EMAIL = "austencentellas@gmail.com";
 
 const app = express();
