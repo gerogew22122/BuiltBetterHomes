@@ -44,11 +44,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Serve the extracted WordPress site from attached_assets/extracted_site/Mjol4GohOxlM.au/
   const sitePath = path.join(process.cwd(), 'attached_assets', 'extracted_site', 'Mjol4GohOxlM.au');
   
-  // Serve static files (CSS, JS, images, etc.)
+  // Serve static files (CSS, JS, images, etc.) for WordPress assets
   app.use(express.static(sitePath));
   
-  // Serve index.html for all routes (SPA-like behavior)
-  app.get('*', (req, res) => {
+  // Only serve WordPress index.html for the root route
+  // Other routes like /contact will be handled by Vite/React
+  app.get('/', (req, res) => {
     res.sendFile(path.join(sitePath, 'index.html'));
   });
 
