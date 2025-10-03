@@ -4,6 +4,7 @@ import path from "path";
 import express from "express";
 import { storage } from "./storage";
 import { insertContactSubmissionSchema } from "@shared/schema";
+import { getUncachableResendClient } from "./resend";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API route to handle contact form submissions
@@ -11,6 +12,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const validatedData = insertContactSubmissionSchema.parse(req.body);
       const submission = await storage.createContactSubmission(validatedData);
+      
+      // Send email notification
+      try {
+        const { client, fromEmail } = await getUncachableResendClient();
+        await client.emails.send({
+          from: fromEmail,
+          to: 'austencentellas@gmail.com',
+          subject: 'New Contact Form Submission - Built Better Homes',
+          html: `
+            <h2>New Contact Form Submission</h2>
+            <p><strong>Name:</strong> ${validatedData.name}</p>
+            <p><strong>Email:</strong> ${validatedData.email}</p>
+            <p><strong>Phone:</strong> ${validatedData.phone}</p>
+            <p><strong>Message:</strong></p>
+            <p>${validatedData.message}</p>
+          `
+        });
+      } catch (emailError) {
+        console.error('Failed to send email notification:', emailError);
+      }
+      
       res.json({ success: true, message: "Thank you! We'll be in touch soon." });
     } catch (error) {
       console.error('Contact form error:', error);
