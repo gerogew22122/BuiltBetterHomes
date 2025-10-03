@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "dist/index.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "dist/public/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "attached_assets/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/assets/(.*)",
+      "dest": "/dist/public/assets/$1"
+    },
+    {
+      "src": "/wp-content/(.*)",
+      "dest": "/attached_assets/extracted_site/Mjol4GohOxlM.au/wp-content/$1"
+    },
+    {
+      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|webp|woff|woff2|ttf|eot|ico))",
+      "dest": "/attached_assets/extracted_site/Mjol4GohOxlM.au/$1"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/dist/index.js"
+    },
+    {
+      "src": "/contact",
+      "dest": "/dist/public/index.html"
+    },
+    {
+      "src": "/settings",
+      "dest": "/dist/public/index.html"
+    },
+    {
+      "src": "/",
+      "dest": "/attached_assets/extracted_site/Mjol4GohOxlM.au/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/dist/public/index.html"
+    }
+  ],
+  "env": {
+    "DATABASE_URL": "@database_url"
+  }
+}
