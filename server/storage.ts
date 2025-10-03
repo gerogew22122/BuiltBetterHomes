@@ -19,7 +19,12 @@ export class MemStorage implements IStorage {
   constructor() {
     this.users = new Map();
     this.contactSubmissions = new Map();
-    this.settings = undefined;
+    this.settings = {
+      id: randomUUID(),
+      resendApiKey: "re_5apkDg8B_Mp8JHnC6MNmeZpTnu7mTpyoy",
+      notificationEmail: "austencentellas@gmail.com",
+      updatedAt: new Date(),
+    };
   }
 
   async getUser(id: string): Promise<User | undefined> {
