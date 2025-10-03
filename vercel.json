@@ -36,10 +36,6 @@
       "dest": "/dist/public/index.html"
     },
     {
-      "src": "/settings",
-      "dest": "/dist/public/index.html"
-    },
-    {
       "src": "/",
       "dest": "/attached_assets/extracted_site/Mjol4GohOxlM.au/index.html"
     },
