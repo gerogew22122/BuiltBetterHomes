@@ -1,5 +1,8 @@
-import { type User, type InsertUser, type ContactSubmission, type InsertContactSubmission, type Settings, type InsertSettings } from "@shared/schema";
+import { type User, type InsertUser, type ContactSubmission, type InsertContactSubmission, type Settings, type InsertSettings, users, contactSubmissions, settings } from "@shared/schema";
 import { randomUUID } from "crypto";
+import { neon } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/neon-http";
+import { eq } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -77,4 +80,72 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+export class DbStorage implements IStorage {
+  private db;
+
+  constructor() {
+    const sql = neon(process.env.DATABASE_URL!);
+    this.db = drizzle(sql);
+  }
+
+  async getUser(id: string): Promise<User | undefined> {
+    const result = await this.db.select().from(users).where(eq(users.id, id)).limit(1);
+    return result[0];
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    const result = await this.db.select().from(users).where(eq(users.username, username)).limit(1);
+    return result[0];
+  }
+
+  async createUser(insertUser: InsertUser): Promise<User> {
+    const result = await this.db.insert(users).values(insertUser).returning();
+    return result[0];
+  }
+
+  async createContactSubmission(insertSubmission: InsertContactSubmission): Promise<ContactSubmission> {
+    const result = await this.db.insert(contactSubmissions).values(insertSubmission).returning();
+    return result[0];
+  }
+
+  async getAllContactSubmissions(): Promise<ContactSubmission[]> {
+    return await this.db.select().from(contactSubmissions).orderBy(contactSubmissions.submittedAt);
+  }
+
+  async getSettings(): Promise<Settings | undefined> {
+    const result = await this.db.select().from(settings).limit(1);
+    if (result.length === 0) {
+      const defaultSettings = await this.upsertSettings({
+        resendApiKey: "re_5apkDg8B_Mp8JHnC6MNmeZpTnu7mTpyoy",
+        notificationEmail: "austencentellas@gmail.com",
+      });
+      return defaultSettings;
+    }
+    return result[0];
+  }
+
+  async upsertSettings(insertSettings: InsertSettings): Promise<Settings> {
+    const existing = await this.db.select().from(settings).limit(1);
+    
+    if (existing.length > 0) {
+      const result = await this.db
+        .update(settings)
+        .set({
+          resendApiKey: insertSettings.resendApiKey || null,
+          notificationEmail: insertSettings.notificationEmail || null,
+          updatedAt: new Date(),
+        })
+        .where(eq(settings.id, existing[0].id))
+        .returning();
+      return result[0];
+    } else {
+      const result = await this.db.insert(settings).values({
+        resendApiKey: insertSettings.resendApiKey || null,
+        notificationEmail: insertSettings.notificationEmail || null,
+      }).returning();
+      return result[0];
+    }
+  }
+}
+
+export const storage = new DbStorage();
