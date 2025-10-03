@@ -538,7 +538,9 @@ Built Better Homes will always work diligently to ensure that new additions seam
                                         <div id="formMessage" style="display: none;"></div>
                                         <input type="text" id="name" name="name" placeholder="Your Name *" required>
                                         <input type="email" id="email" name="email" placeholder="Your Email *" required>
-                                        <input type="tel" id="phone" name="phone" placeholder="Your Phone Number *" required>
+                                        <input type="tel" id="phone" name="phone" placeholder="Contact Number *" required>
+                                        <input type="text" id="budget" name="budget" placeholder="Budget *" required>
+                                        <input type="text" id="area" name="area" placeholder="Area there from *" required>
                                         <textarea id="message" name="message" placeholder="Tell us about your project *" required></textarea>
                                         <button type="submit" id="submitBtn">Send Message</button>
                                     </form>
@@ -551,6 +553,8 @@ Built Better Homes will always work diligently to ensure that new additions seam
                                                 name: document.getElementById('name').value,
                                                 email: document.getElementById('email').value,
                                                 phone: document.getElementById('phone').value,
+                                                budget: document.getElementById('budget').value,
+                                                area: document.getElementById('area').value,
                                                 message: document.getElementById('message').value
                                             };
                                             submitBtn.disabled = true;
