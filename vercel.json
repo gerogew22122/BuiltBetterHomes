@@ -1,47 +1,28 @@
 {
-  "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "dist/index.js",
-      "use": "@vercel/node"
+      "source": "/api/:path*",
+      "destination": "/api"
     },
     {
-      "src": "dist/public/**",
-      "use": "@vercel/static"
+      "source": "/wp-content/:path*",
+      "destination": "/attached_assets/extracted_site/Mjol4GohOxlM.au/wp-content/:path*"
     },
     {
-      "src": "attached_assets/**",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/assets/(.*)",
-      "dest": "/dist/public/assets/$1"
+      "source": "/:path(.*\\.(css|js|png|jpg|jpeg|gif|svg|webp|woff|woff2|ttf|eot|ico))",
+      "destination": "/attached_assets/extracted_site/Mjol4GohOxlM.au/:path"
     },
     {
-      "src": "/wp-content/(.*)",
-      "dest": "/attached_assets/extracted_site/Mjol4GohOxlM.au/wp-content/$1"
+      "source": "/contact",
+      "destination": "/dist/public/index.html"
     },
     {
-      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|webp|woff|woff2|ttf|eot|ico))",
-      "dest": "/attached_assets/extracted_site/Mjol4GohOxlM.au/$1"
+      "source": "/",
+      "destination": "/attached_assets/extracted_site/Mjol4GohOxlM.au/index.html"
     },
     {
-      "src": "/api/(.*)",
-      "dest": "/dist/index.js"
-    },
-    {
-      "src": "/contact",
-      "dest": "/dist/public/index.html"
-    },
-    {
-      "src": "/",
-      "dest": "/attached_assets/extracted_site/Mjol4GohOxlM.au/index.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/dist/public/index.html"
+      "source": "/:path*",
+      "destination": "/dist/public/index.html"
     }
   ]
 }
