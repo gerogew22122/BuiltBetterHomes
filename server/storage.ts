@@ -1,4 +1,4 @@
-import { type User, type InsertUser, type ContactSubmission, type InsertContactSubmission } from "@shared/schema";
+import { type User, type InsertUser, type ContactSubmission, type InsertContactSubmission, type Settings, type InsertSettings } from "@shared/schema";
 import { randomUUID } from "crypto";
 
 export interface IStorage {
@@ -7,15 +7,19 @@ export interface IStorage {
   createUser(user: InsertUser): Promise<User>;
   createContactSubmission(submission: InsertContactSubmission): Promise<ContactSubmission>;
   getAllContactSubmissions(): Promise<ContactSubmission[]>;
+  getSettings(): Promise<Settings | undefined>;
+  upsertSettings(settings: InsertSettings): Promise<Settings>;
 }
 
 export class MemStorage implements IStorage {
   private users: Map<string, User>;
   private contactSubmissions: Map<string, ContactSubmission>;
+  private settings: Settings | undefined;
 
   constructor() {
     this.users = new Map();
     this.contactSubmissions = new Map();
+    this.settings = undefined;
   }
 
   async getUser(id: string): Promise<User | undefined> {
@@ -50,6 +54,21 @@ export class MemStorage implements IStorage {
     return Array.from(this.contactSubmissions.values()).sort(
       (a, b) => b.submittedAt.getTime() - a.submittedAt.getTime()
     );
+  }
+
+  async getSettings(): Promise<Settings | undefined> {
+    return this.settings;
+  }
+
+  async upsertSettings(insertSettings: InsertSettings): Promise<Settings> {
+    const settings: Settings = {
+      id: this.settings?.id || randomUUID(),
+      resendApiKey: insertSettings.resendApiKey || null,
+      notificationEmail: insertSettings.notificationEmail || null,
+      updatedAt: new Date(),
+    };
+    this.settings = settings;
+    return settings;
   }
 }
 
