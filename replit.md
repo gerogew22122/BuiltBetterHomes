@@ -1,8 +1,8 @@
 # Overview
 
-This is a construction/home building company website called "Built Better Homes" that serves a static WordPress site while adding a React-based contact form submission system. The application is built using a modern full-stack architecture with Express.js backend, React frontend (powered by Vite), and includes a comprehensive UI component library based on shadcn/ui.
+This is a construction/home building company website called "Built Better Homes" that serves a static WordPress site while adding a React-based contact form. The application is built using a modern full-stack architecture with Express.js backend, React frontend (powered by Vite), and includes a comprehensive UI component library based on shadcn/ui.
 
-The WordPress site is served statically from extracted files, while the React application provides enhanced functionality for form handling and potential future interactive features. The application uses TypeScript throughout for type safety and includes PostgreSQL database integration for storing contact submissions.
+The WordPress site is served statically from extracted files, while the React application provides an enhanced contact form at `/contact` that sends email notifications via Resend. The application uses TypeScript throughout for type safety.
 
 # User Preferences
 
@@ -22,7 +22,8 @@ Preferred communication style: Simple, everyday language.
 
 **Routing**: Wouter for client-side routing
 - Lightweight alternative to React Router
-- Currently configured with a catch-all 404 page
+- `/contact` route for the React contact form
+- Fallback 404 page for unmatched routes
 
 **State Management**: TanStack Query (React Query) for server state management
 - Centralized query client configuration
@@ -42,16 +43,20 @@ Preferred communication style: Simple, everyday language.
 
 **Architecture Pattern**: Monolithic server with separated concerns
 - Route handlers in `server/routes.ts`
-- Storage abstraction layer in `server/storage.ts`
 - Vite integration for development mode in `server/vite.ts`
 
 **Static Site Serving**: The application serves an extracted WordPress site from `attached_assets/extracted_site/Mjol4GohOxlM.au/`
-- All routes fall through to serve the WordPress static content
+- WordPress site served at root `/`
 - Static assets (CSS, JS, images) served via Express static middleware
-- SPA-like behavior with index.html served for all non-API routes
+- React SPA routes (like `/contact`) handled separately
 
 **API Design**: RESTful endpoints under `/api` prefix
-- POST `/api/contact` - Handles contact form submissions with validation
+- POST `/api/contact` - Handles contact form submissions with email notifications via Resend
+
+**Email Notifications**: Resend integration for contact form submissions
+- API Key: Hardcoded in `server/routes.ts`
+- Notification Email: austencentellas@gmail.com
+- Sends formatted HTML emails with submission details (name, email, phone, budget, location, message)
 
 **Request Logging**: Custom middleware for API request logging
 - Logs method, path, status code, and duration
@@ -64,26 +69,24 @@ Preferred communication style: Simple, everyday language.
 
 ## Data Storage
 
-**Database**: PostgreSQL (via Neon Database serverless driver)
+**No Database**: Application does not persist data
+- Contact form submissions are sent via email only
+- No storage of submissions or user data
+- Stateless design for simple deployment
 
-**ORM**: Drizzle ORM
-- Type-safe database queries
-- Schema-first approach with TypeScript inference
-- Migrations stored in `./migrations` directory
-
-**Storage Abstraction**: Interface-based storage layer (`IStorage`)
-- Enables swapping between in-memory and database implementations
-- Currently uses `MemStorage` (in-memory) implementation
-- Database schema defined but not yet actively used
-
-**Schema Design**:
-- `users` table: id (UUID), username (unique), password
-- `contact_submissions` table: id (UUID), name, email, phone, message, submittedAt (timestamp)
-- Zod schemas for validation derived from Drizzle schemas
-
-**Validation**: Zod integration with Drizzle for runtime validation
+**Validation**: Zod schemas for runtime validation
 - `insertContactSubmissionSchema` validates incoming contact form data
 - Type inference from schemas ensures frontend/backend type consistency
+
+## Contact Form Fields
+
+The contact form collects the following information:
+- Name (required)
+- Email (required)
+- Phone (required)
+- Budget (required)
+- Location (required)
+- Message (required)
 
 ## Development Workflow
 
@@ -100,6 +103,14 @@ Preferred communication style: Simple, everyday language.
 **Type Checking**: TypeScript with strict mode enabled
 - Incremental builds for faster compilation
 - Path aliases configured for cleaner imports (@, @shared, @assets)
+
+## Deployment
+
+**Vercel Configuration**: Ready for Vercel deployment
+- `vercel.json` configured with proper routing
+- Framework: Vite
+- No environment variables required
+- Static WordPress site and React SPA properly routed
 
 ## External Dependencies
 
@@ -119,16 +130,12 @@ Preferred communication style: Simple, everyday language.
 - @hookform/resolvers for Zod schema integration
 - Provides performant, flexible form validation
 
-**Database & Backend**:
-- @neondatabase/serverless - Serverless PostgreSQL driver
-- drizzle-orm - TypeScript ORM
-- drizzle-zod - Zod schema generation from Drizzle schemas
-- connect-pg-simple - PostgreSQL session store for Express
+**Email Service**:
+- Resend - Email API for sending notification emails
 
 **Utilities**:
 - date-fns - Date manipulation library
-- nanoid - Unique ID generation
-- adm-zip - ZIP file handling (likely for asset management)
+- adm-zip - ZIP file handling (for asset management)
 - wouter - Lightweight routing
 
 **Development Tools**:
