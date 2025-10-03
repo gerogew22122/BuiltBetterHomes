@@ -5,14 +5,24 @@ import express from "express";
 import { Resend } from "resend";
 import { insertContactSubmissionSchema } from "@shared/schema";
 
-const RESEND_API_KEY = "re_5apkDg8B_Mp8JHnC6MNmeZpTnu7mTpyoy";
-const NOTIFICATION_EMAIL = "austencentellas@gmail.com";
+const RESEND_API_KEY = process.env.RESEND_API_KEY || "";
+const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL || "";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API route to handle contact form submissions
   app.post('/api/contact', async (req, res) => {
     try {
       const validatedData = insertContactSubmissionSchema.parse(req.body);
+
+      // Check if Resend credentials are configured
+      if (!RESEND_API_KEY || !NOTIFICATION_EMAIL) {
+        console.error('Missing Resend configuration: RESEND_API_KEY or NOTIFICATION_EMAIL not set');
+        res.status(500).json({ 
+          success: false, 
+          message: "Email service not configured. Please contact support." 
+        });
+        return;
+      }
 
       // Send email notification via Resend
       try {
