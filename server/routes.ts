@@ -47,8 +47,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Serve static files (CSS, JS, images, etc.)
   app.use(express.static(sitePath));
   
-  // Serve index.html for all routes (SPA-like behavior)
-  app.get('*', (req, res) => {
+  // Only serve WordPress index.html for the root route
+  // Let Vite handle other routes like /contact
+  app.get('/', (req, res) => {
     res.sendFile(path.join(sitePath, 'index.html'));
   });
 
