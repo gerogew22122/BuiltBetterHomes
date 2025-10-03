@@ -38,3 +38,21 @@ export const insertContactSubmissionSchema = createInsertSchema(contactSubmissio
 
 export type InsertContactSubmission = z.infer<typeof insertContactSubmissionSchema>;
 export type ContactSubmission = typeof contactSubmissions.$inferSelect;
+
+export const settings = pgTable("settings", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  resendApiKey: text("resend_api_key"),
+  notificationEmail: text("notification_email"),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+export const insertSettingsSchema = createInsertSchema(settings).omit({
+  id: true,
+  updatedAt: true,
+}).extend({
+  resendApiKey: z.string().optional(),
+  notificationEmail: z.string().email("Please enter a valid email address").optional(),
+});
+
+export type InsertSettings = z.infer<typeof insertSettingsSchema>;
+export type Settings = typeof settings.$inferSelect;
