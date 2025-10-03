@@ -52,6 +52,7 @@ Preferred communication style: Simple, everyday language.
 
 **API Design**: RESTful endpoints under `/api` prefix
 - POST `/api/contact` - Handles contact form submissions with email notifications via Resend
+- CORS enabled - API accepts requests from any domain, allowing form integration on external websites
 
 **Email Notifications**: Resend integration for contact form submissions
 - API Key: Hardcoded in `server/routes.ts`
