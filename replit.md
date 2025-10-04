@@ -6,13 +6,20 @@ The WordPress site is served statically from extracted files, while the React ap
 
 # Recent Changes
 
+**October 4, 2025 - FormSubmit Integration**:
+- Replaced WordPress contact form with FormSubmit integration
+- Form now posts directly to `https://formsubmit.co/austencentellas@gmail.com`
+- No backend API required for contact form submissions
+- Users will receive email notifications when someone submits the contact form
+- First submission requires email confirmation via FormSubmit
+
 **October 4, 2025 - GitHub Import to Replit Setup**:
 - Successfully imported GitHub repository to Replit environment
 - Installed all npm dependencies (571 packages)
 - Configured workflow "Start application" to run `npm run dev` on port 5000 with webview output
 - Verified Vite dev server starts successfully with HMR enabled
 - Confirmed WordPress static site loads correctly at root `/`
-- Confirmed React contact form page loads correctly at `/contact`
+- React contact form page still available at `/contact` (using backend API)
 - Set up autoscale deployment configuration with build and start commands
 - Environment uses Node.js 20 and existing package.json scripts
 - Both frontend (Vite) and backend (Express) running on port 5000 as required by Replit
@@ -20,8 +27,8 @@ The WordPress site is served statically from extracted files, while the React ap
 - Vite configured with `allowedHosts: true` for Replit proxy compatibility
 
 **Important Notes**:
-- Environment variables `RESEND_API_KEY` and `NOTIFICATION_EMAIL` need to be set via Replit Secrets
-- Contact form will not send emails until Resend API key is configured
+- WordPress homepage contact form uses FormSubmit - no configuration needed
+- React contact form at `/contact` requires `RESEND_API_KEY` and `NOTIFICATION_EMAIL` environment variables
 - Application is ready for immediate use and deployment
 
 **January 2025**: 
