@@ -1,20 +1,32 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/public",
   "rewrites": [
     {
       "source": "/wp-content/:path*",
       "destination": "/attached_assets/extracted_site/Mjol4GohOxlM.au/wp-content/:path*"
     },
     {
-      "source": "/contact",
-      "destination": "/dist/public/index.html"
+      "source": "/wp-includes/:path*",
+      "destination": "/attached_assets/extracted_site/Mjol4GohOxlM.au/wp-includes/:path*"
     },
     {
       "source": "/",
       "destination": "/attached_assets/extracted_site/Mjol4GohOxlM.au/index.html"
     },
     {
-      "source": "/:path((?!api/).*)",
-      "destination": "/dist/public/index.html"
+      "source": "/contact",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/:path((?!api|wp-content|wp-includes).*)",
+      "destination": "/index.html"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/contact",
+      "dest": "/api/contact.ts"
     }
   ]
 }

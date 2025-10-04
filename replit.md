@@ -152,10 +152,24 @@ The contact form collects the following information:
 - Serves on port 5000 (only non-firewalled port)
 - Host: 0.0.0.0 for external access
 
-**Vercel Configuration**: Ready for Vercel deployment
-- `vercel.json` configured with proper routing
-- Framework: Vite
-- Static WordPress site and React SPA properly routed
+**Vercel Deployment**: Fully configured and ready to deploy
+- Build command: `npm run build` (automatically configured in vercel.json)
+- Output directory: `dist/public` (automatically configured in vercel.json)
+- Serverless API: `/api/contact` endpoint for React contact form
+- Static file serving: WordPress site served from `attached_assets/`
+- Environment variables needed:
+  - `RESEND_API_KEY` - API key for Resend email service (optional, only for `/contact` page)
+  - `NOTIFICATION_EMAIL` - Email address to receive contact form notifications (optional, only for `/contact` page)
+- Deployment steps:
+  1. Connect your GitHub repository to Vercel
+  2. Vercel will auto-detect the configuration from `vercel.json`
+  3. Add environment variables in Vercel dashboard if using the React contact form
+  4. Deploy!
+- All routes properly configured:
+  - `/` - WordPress homepage with FormSubmit contact form
+  - `/contact` - React contact page (requires Resend API key)
+  - `/api/contact` - Serverless function for contact form submissions
+  - `/wp-content/*` and `/wp-includes/*` - WordPress static assets
 
 ## External Dependencies
 
