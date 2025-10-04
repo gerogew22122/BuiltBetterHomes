@@ -1,0 +1,61 @@
+14:09:17.947 Running build in Washington, D.C., USA (East) – iad1
+14:09:17.952 Build machine configuration: 2 cores, 8 GB
+14:09:18.015 Cloning github.com/gerogew22122/BuiltBetterHomes (Branch: main, Commit: 03bf61d)
+14:09:21.877 Cloning completed: 3.862s
+14:09:21.919 Found .vercelignore
+14:09:21.930 Removed 25 ignored files defined in .vercelignore
+14:09:21.931   /.git/config
+14:09:21.931   /.git/description
+14:09:21.931   /.git/FETCH_HEAD
+14:09:21.931   /.git/HEAD
+14:09:21.931   /.git/hooks/applypatch-msg.sample
+14:09:21.931   /.git/hooks/commit-msg.sample
+14:09:21.931   /.git/hooks/fsmonitor-watchman.sample
+14:09:21.931   /.git/hooks/post-update.sample
+14:09:21.931   /.git/hooks/pre-applypatch.sample
+14:09:21.931   /.git/hooks/pre-commit.sample
+14:09:21.986 Restored build cache from previous deployment (HAvJTXQGRuGicdH3pKuytwyFHn9j)
+14:09:22.505 Running "vercel build"
+14:09:22.887 Vercel CLI 48.2.0
+14:09:23.567 Installing dependencies...
+14:09:24.958 
+14:09:24.959 up to date in 1s
+14:09:24.959 
+14:09:24.959 70 packages are looking for funding
+14:09:24.960   run `npm fund` for details
+14:09:25.091 
+14:09:25.092 > rest-express@1.0.0 build
+14:09:25.092 > vite build && node copy-wp-files.js && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+14:09:25.092 
+14:09:25.374 [36mvite v5.4.20 [32mbuilding for production...[36m[39m
+14:09:25.430 transforming...
+14:09:25.751 Browserslist: browsers data (caniuse-lite) is 12 months old. Please run:
+14:09:25.751   npx update-browserslist-db@latest
+14:09:25.752   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+14:09:26.701 
+14:09:26.702 A PostCSS plugin did not pass the `from` option to `postcss.parse`. This may cause imported assets to be incorrectly transformed. If you've recently added a PostCSS plugin that raised this warning, please contact the package author to fix the issue.
+14:09:29.830 [32m✓[39m 1775 modules transformed.
+14:09:30.146 rendering chunks...
+14:09:30.153 computing gzip size...
+14:09:30.168 [2m../dist/public/[22m[32mindex.html                 [39m[1m[2m  1.95 kB[22m[1m[22m[2m │ gzip:   0.74 kB[22m
+14:09:30.169 [2m../dist/public/[22m[2massets/[22m[35mindex-BHnLH6g7.css  [39m[1m[2m 68.97 kB[22m[1m[22m[2m │ gzip:  11.14 kB[22m
+14:09:30.169 [2m../dist/public/[22m[2massets/[22m[36mindex-UW9pcbYX.js   [39m[1m[2m398.73 kB[22m[1m[22m[2m │ gzip: 123.56 kB[22m
+14:09:30.169 [32m✓ built in 4.77s[39m
+14:09:30.231 Copying WordPress files to build output...
+14:09:30.232 Source directory: /vercel/path0/attached_assets/extracted_site/Mjol4GohOxlM.au
+14:09:30.232 Destination directory: /vercel/path0/dist/public
+14:09:30.232 Copying index.html...
+14:09:30.235 Copying wp-content...
+14:09:30.350 Copying wp-includes...
+14:09:30.353 WordPress files copied successfully!
+14:09:30.353 Files in dist/public:
+14:09:30.354 assets, index.html, wordpress-index.html, wp-content, wp-includes
+14:09:30.388 
+14:09:30.388   dist/index.js  8.7kb
+14:09:30.388 
+14:09:30.388 ⚡ Done in 8ms
+14:09:30.647 Using TypeScript 5.6.3 (local user-provided)
+14:09:37.304 Build Completed in /vercel/output [14s]
+14:09:37.475 Deploying outputs...
+14:09:44.121 Deployment completed
+14:09:44.966 Creating build cache...

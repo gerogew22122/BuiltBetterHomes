@@ -17,8 +17,16 @@ if (!existsSync(destDir)) {
 
 // Copy WordPress files
 try {
-  console.log('Copying index.html...');
-  await cp(join(sourceDir, 'index.html'), join(destDir, 'wordpress-index.html'));
+  // First rename the React SPA index.html to react-index.html
+  const reactIndex = join(destDir, 'index.html');
+  const reactIndexRenamed = join(destDir, 'react-index.html');
+  
+  console.log('Renaming React index.html to react-index.html...');
+  await cp(reactIndex, reactIndexRenamed);
+  
+  // Now copy WordPress index.html as the main index.html
+  console.log('Copying WordPress index.html as main index.html...');
+  await cp(join(sourceDir, 'index.html'), reactIndex);
   
   console.log('Copying wp-content...');
   await cp(join(sourceDir, 'wp-content'), join(destDir, 'wp-content'), { recursive: true });

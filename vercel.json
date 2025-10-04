@@ -3,16 +3,8 @@
   "outputDirectory": "dist/public",
   "rewrites": [
     {
-      "source": "/",
-      "destination": "/wordpress-index.html"
-    },
-    {
       "source": "/contact",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/:path((?!api|wp-content|wp-includes).*)",
-      "destination": "/index.html"
+      "destination": "/react-index.html"
     }
   ]
 }
