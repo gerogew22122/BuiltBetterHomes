@@ -1,0 +1,43 @@
+13:49:57.699 Running build in Washington, D.C., USA (East) – iad1
+13:49:57.700 Build machine configuration: 2 cores, 8 GB
+13:49:57.729 Cloning github.com/gerogew22122/BuiltBetterHomes (Branch: main, Commit: 8c37ce7)
+13:49:57.772 Skipping build cache, deployment was triggered without cache.
+13:50:00.190 Cloning completed: 2.461s
+13:50:00.724 Running "vercel build"
+13:50:01.129 Vercel CLI 48.2.0
+13:50:01.932 Installing dependencies...
+13:50:07.184 npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+13:50:07.209 npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+13:50:12.466 
+13:50:12.466 added 570 packages in 10s
+13:50:12.466 
+13:50:12.467 70 packages are looking for funding
+13:50:12.467   run `npm fund` for details
+13:50:12.559 Running "npm run build"
+13:50:12.674 
+13:50:12.675 > rest-express@1.0.0 build
+13:50:12.675 > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+13:50:12.675 
+13:50:13.674 [36mvite v5.4.20 [32mbuilding for production...[36m[39m
+13:50:13.724 transforming...
+13:50:13.974 Browserslist: browsers data (caniuse-lite) is 12 months old. Please run:
+13:50:13.975   npx update-browserslist-db@latest
+13:50:13.975   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+13:50:14.904 
+13:50:14.906 A PostCSS plugin did not pass the `from` option to `postcss.parse`. This may cause imported assets to be incorrectly transformed. If you've recently added a PostCSS plugin that raised this warning, please contact the package author to fix the issue.
+13:50:17.998 [32m✓[39m 1775 modules transformed.
+13:50:18.296 rendering chunks...
+13:50:18.303 computing gzip size...
+13:50:18.614 [2m../dist/public/[22m[32mindex.html                 [39m[1m[2m  1.95 kB[22m[1m[22m[2m │ gzip:   0.74 kB[22m
+13:50:18.614 [2m../dist/public/[22m[2massets/[22m[35mindex-BHnLH6g7.css  [39m[1m[2m 68.97 kB[22m[1m[22m[2m │ gzip:  11.14 kB[22m
+13:50:18.615 [2m../dist/public/[22m[2massets/[22m[36mindex-UW9pcbYX.js   [39m[1m[2m398.73 kB[22m[1m[22m[2m │ gzip: 123.56 kB[22m
+13:50:18.618 [32m✓ built in 4.92s[39m
+13:50:18.651 
+13:50:18.651   dist/index.js  8.7kb
+13:50:18.651 
+13:50:18.651 ⚡ Done in 5ms
+13:50:18.881 Using TypeScript 5.6.3 (local user-provided)
+13:50:25.046 Build Completed in /vercel/output [23s]
+13:50:25.196 Deploying outputs...
+13:50:29.296 Deployment completed
+13:50:30.348 Creating build cache...

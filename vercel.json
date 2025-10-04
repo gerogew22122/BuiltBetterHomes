@@ -3,16 +3,8 @@
   "outputDirectory": "dist/public",
   "rewrites": [
     {
-      "source": "/wp-content/:path*",
-      "destination": "/attached_assets/extracted_site/Mjol4GohOxlM.au/wp-content/:path*"
-    },
-    {
-      "source": "/wp-includes/:path*",
-      "destination": "/attached_assets/extracted_site/Mjol4GohOxlM.au/wp-includes/:path*"
-    },
-    {
       "source": "/",
-      "destination": "/attached_assets/extracted_site/Mjol4GohOxlM.au/index.html"
+      "destination": "/wordpress-index.html"
     },
     {
       "source": "/contact",
